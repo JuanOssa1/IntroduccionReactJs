@@ -1,10 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+/**Un componente inicia con la letra mayuscula */
+//const url = "https://imagenes/chistosas.jpg"
+        /**Aqui lo que esta haciendo es combinar 
+        javascript con html porque como podemos ver ahi estamos
+        mandando el nombre */
+
+/**Ahora la class del div se llamaran class name */
+/**Todo lo de abajo no son etiquetas html si no jsx
+ * no confundir las cosas 
+ */
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
+
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -15,7 +26,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {props.children}
         </a>
       </header>
     </div>
