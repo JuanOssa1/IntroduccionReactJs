@@ -1,5 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import react from "react";
+import { TodoCounter } from "./TodoCounter";
+import { TodoSearch } from "./TodoSearch.js";
+import { TodoList } from "./TodoList.js";
+import { TodoItem } from "./TodoItem.js";
+import { CreateTodoButtom } from "./CreateTodoButtom.js";
+//import './App.css';
 
 /**Un componente inicia con la letra mayuscula */
 //const url = "https://imagenes/chistosas.jpg"
@@ -11,25 +16,33 @@ import './App.css';
 /**Todo lo de abajo no son etiquetas html si no jsx
  * no confundir las cosas 
  */
-function App(props) {
-  return (
-    <div className="App">
-      <header className="App-header">
+/**Metemos todo dentro de un div porque react solo lee un 
+ * compinente a es como en java que solo puede haber un return
+ * pero esto no es bueno por lo que hacemos un comando 
+ * con react para que nos cree una etiqueta invisib;e que 
+ * es react.fragment que hace lo de un div pero sin afectar al css
+ * 
+ */
+const todos =[
+  {text: 'cortar cebolla', completed: false},
+  {text: 'tomar cebolla', completed: false},
+  {text: 'bailar cebolla', completed: false}
+];
 
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {props.children}
-        </a>
-      </header>
-    </div>
+
+function App() {
+  return (
+   <react.Fragment>
+      <TodoCounter />    
+      <TodoSearch />
+      <TodoList>
+        {/**con key le encio el indentidicador unico de cada componente
+         * esto s para que lo use react no mas
+         */}
+        {todos.map(todo =>(<TodoItem key={todo.text} text={todo.text} />))}
+      </TodoList>
+      <CreateTodoButtom />      
+   </react.Fragment>
   );
 }
 

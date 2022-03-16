@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+//import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+//import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   /**Asi escribiuremos el resto de los
@@ -21,9 +21,8 @@ ReactDOM.render(
    * obtenga el contenido que se encuentra dentro
    * 
   */
-    <App>
-      Buenasaaaaaaaaaaaaaaa
-    </App>,
+    <App/>,
+
     document.getElementById("root")
 );
 /*
