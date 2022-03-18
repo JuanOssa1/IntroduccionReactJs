@@ -7,4 +7,4 @@ function CreateTodoButton(props) {
   );
 }
 
-export { CreateTodoButton };
+export default CreateTodoButton;

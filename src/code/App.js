@@ -2,8 +2,8 @@ import react from "react";
 import { TodoCounter } from "../code/TodoCounter.js";
 import { TodoSearch } from "../code/TodoSearch.js";
 import { TodoList } from "../code/TodoList.js";
-import { TodoItem } from "../code/TodoItem.js";
-import { CreateTodoButtom } from "../code/CreateTodoButtom";
+import { TodoItem } from "../code/TodoItem";
+import CreateTodoButtom from "../code/CreateTodoButtom";
 //import './App.css';
 
 /**Un componente inicia con la letra mayuscula */
