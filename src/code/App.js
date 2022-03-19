@@ -23,23 +23,34 @@ import CreateTodoButtom from "../code/CreateTodoButtom";
  * es react.fragment que hace lo de un div pero sin afectar al css
  *
  */
-const todos = [
-  { text: "cortar cebolla", completed: false },
+const defaultodos = [
+  { text: "cortar cebolla", completed: true },
   { text: "tomar cebolla", completed: false },
   { text: "bailar cebolla", completed: false },
 ];
 
 function App() {
+  {/**como react esta actualizando constamente pues puedo usar
+esta varables que tengo metidad en el arregloe para hacer filtros*/}
+  const [todos, setTodos] = React.useState(defaultodos);
   const [searchValue, setSearchValue] = React.useState('');
+  const completedToDos = todos.filter(todo=>todo.completed==true).length;
+  const totalTodos = todos.length;
+  let filtered = todos.filter(todo=>todo.text.includes(searchValue.toLowerCase()));
   return (
     <React.Fragment>
-      <TodoCounter />
+      <TodoCounter 
+        total={totalTodos}
+        completed={completedToDos}
+      
+      
+      />
       <TodoSearch  searchValue={searchValue} setSearchValue={setSearchValue} />
       <TodoList>
         {/**con key le encio el indentidicador unico de cada componente
          * esto s para que lo use react no mas
          */}
-        {todos.map((todo) => (
+        {filtered.map((todo) => (
           <TodoItem
             key={todo.text}
             text={todo.text}
