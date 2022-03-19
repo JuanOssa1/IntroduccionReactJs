@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { TodoCounter } from "../code/TodoCounter.js";
 import { TodoSearch } from "../code/TodoSearch.js";
 import { TodoList } from "../code/TodoList.js";
@@ -24,28 +24,47 @@ import CreateTodoButtom from "../code/CreateTodoButtom";
  *
  */
 const defaultodos = [
-  { text: "cortar cebolla", completed: true },
+  { text: "cortar cebolla", completed: false },
   { text: "tomar cebolla", completed: false },
   { text: "bailar cebolla", completed: false },
 ];
 
 function App() {
-  {/**como react esta actualizando constamente pues puedo usar
-esta varables que tengo metidad en el arregloe para hacer filtros*/}
+  {
+    /**como react esta actualizando constamente pues puedo usar
+esta varables que tengo metidad en el arregloe para hacer filtros*/
+  }
   const [todos, setTodos] = React.useState(defaultodos);
-  const [searchValue, setSearchValue] = React.useState('');
-  const completedToDos = todos.filter(todo=>todo.completed==true).length;
+  const [searchValue, setSearchValue] = React.useState("");
+  const completedToDos = todos.filter((todo) => todo.completed == true).length;
   const totalTodos = todos.length;
-  let filtered = todos.filter(todo=>todo.text.includes(searchValue.toLowerCase()));
+  let filtered = todos.filter((todo) =>
+    todo.text.includes(searchValue.toLowerCase())
+  );
+
+  const completeTodo = (text) => {
+    const todoIndex = todos.findIndex((todo) => todo.text === text);
+    {
+      /**Inyecta los todos previos en un nuevo arreglo */
+    }
+    const newTodos = [...todos];
+    newTodos[todoIndex].completed = true;
+    setTodos(newTodos);
+  };
+  const removeTodo = (text) => {
+    const todoIndex = todos.findIndex((todo) => todo.text === text);
+    {
+      /**Inyecta los todos previos en un nuevo arreglo */
+    }
+    const newTodos = [...todos];
+    let updated = newTodos.filter((newTodos) => !newTodos.text.includes(text));
+    //newTodos.splice()
+    setTodos(updated);
+  };
   return (
     <React.Fragment>
-      <TodoCounter 
-        total={totalTodos}
-        completed={completedToDos}
-      
-      
-      />
-      <TodoSearch  searchValue={searchValue} setSearchValue={setSearchValue} />
+      <TodoCounter total={totalTodos} completed={completedToDos} />
+      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       <TodoList>
         {/**con key le encio el indentidicador unico de cada componente
          * esto s para que lo use react no mas
@@ -55,6 +74,8 @@ esta varables que tengo metidad en el arregloe para hacer filtros*/}
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)}
+            onDelete={() => removeTodo(todo.text)}
           />
         ))}
       </TodoList>
