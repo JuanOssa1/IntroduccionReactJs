@@ -1,4 +1,4 @@
-import react from "react";
+import React from 'react';
 import { TodoCounter } from "../code/TodoCounter.js";
 import { TodoSearch } from "../code/TodoSearch.js";
 import { TodoList } from "../code/TodoList.js";
@@ -30,10 +30,11 @@ const todos = [
 ];
 
 function App() {
+  const [searchValue, setSearchValue] = React.useState('');
   return (
-    <react.Fragment>
+    <React.Fragment>
       <TodoCounter />
-      <TodoSearch />
+      <TodoSearch  searchValue={searchValue} setSearchValue={setSearchValue} />
       <TodoList>
         {/**con key le encio el indentidicador unico de cada componente
          * esto s para que lo use react no mas
@@ -47,7 +48,7 @@ function App() {
         ))}
       </TodoList>
       <CreateTodoButtom />
-    </react.Fragment>
+    </React.Fragment>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Styles/TodoSearch.css';
 
-function TodoSearch() {
+function TodoSearch({searchValue, setSearchValue}) {
     {/**Esto es como si fuera un observer mira constantemente
 que es lo que ha cambiado y lo va actualizando retorna 
 un objeto y a ese ojet de las tantas propiedades que tiene
@@ -10,22 +10,19 @@ y ese useState es un react Hook*/}
 {/**el primer parametro del arreglo defiene el nombre del estado
 actual y el segundo define el nombre de la funcion para
 actualizar el estado */}
-  const [searchValue, setSearchValue] = React.useState('');
-
   const onSearchValueChange = (event) =>{
     console.log(event.target.value);
     setSearchValue(event.target.value);
   };
 
-  return [
+  return (
     <input 
       className="TodoSearch" 
       placeholder="Escribe algo"
       onChange={onSearchValueChange}
       value={searchValue}
-    />,
-    <p>{searchValue}</p>
-  ];
+    />
+  );
 }
 
 export { TodoSearch };
