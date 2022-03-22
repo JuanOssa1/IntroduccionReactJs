@@ -6,6 +6,8 @@ import { TodoItem } from "../TodoItem/TodoItem";
 import CreateTodoButtom from "../CreateTodoButtom/CreateTodoButtom";
 {/**deben ser los mismos nombre a los que uno iguala en app.js */}
 function AppUI({
+      loading,
+      error,
       totalTodos,
       completedTodos,
       searchValue,
@@ -19,9 +21,12 @@ function AppUI({
       <TodoCounter total={totalTodos} completed={completedTodos} />
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       <TodoList>
-        {/**con key le encio el indentidicador unico de cada componente
+        {/**con key le envio el indentidicador unico de cada componente
          * esto s para que lo use react no mas
          */}
+        {error && <p>Desespérate, hubo un error...</p>}
+        {loading && <p>Estamos cargando, no desesperes...</p>}
+        {(!loading && !filteredTodos.length) && <p>¡Crea tu primer TODO!</p>}
         {filteredTodos.map((todo) => (
           <TodoItem
             key={todo.text}

@@ -28,34 +28,45 @@ const defaultodos = [
 */
 /**Haciendo nuestro propio react Hook */
 function useLocalStorage(itemName, initialValue) {
-  
-  const localStorageItem = localStorage.getItem(itemName);
-  let parsedItem;
+  const [error, setError] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const [item, setItem] = React.useState(initialValue);
+  React.useEffect(() => {
+    try {
+      setTimeout(() => {
+        const localStorageItem = localStorage.getItem(itemName);
+        let parsedItem;
 
-  if (!localStorageItem) {
-    localStorage.setItem(itemName, JSON.stringify(initialValue));
-    parsedItem = initialValue;
-  } else {
-    parsedItem = JSON.parse(localStorageItem);
-  }
-
-  const [item, setItem] = React.useState(parsedItem);
+        if (!localStorageItem) {
+          localStorage.setItem(itemName, JSON.stringify(initialValue));
+          parsedItem = initialValue;
+        } else {
+          parsedItem = JSON.parse(localStorageItem);
+        }
+        setItem(parsedItem);
+        setLoading(false);
+      }, 1000);
+    } catch (error) {
+      setError(error);
+    }
+  }, []);
 
   const saveItem = (newItem) => {
-    {
-      /*En set item itemName antes TODOS_V1 es el nombre que nosotros
-      le definimos a ese local storage para luego llamarlo
-      si lo ecesitamos* */
+    try {
+      {
+        /*En set item itemName antes TODOS_V1 es el nombre que nosotros
+        le definimos a ese local storage para luego llamarlo
+        si lo ecesitamos* */
+      }
+      const stringifiedItem = JSON.stringify(newItem);
+      localStorage.setItem(itemName, stringifiedItem);
+      setItem(newItem);
+    } catch (error) {
+      setError(error);
     }
-    const stringifiedItem = JSON.stringify(newItem);
-    localStorage.setItem(itemName, stringifiedItem);
-    setItem(newItem);
   };
 
-  return [
-    item,
-    saveItem,
-  ];
+  return { item, saveItem, loading, error};
 }
 
 function App() {
@@ -64,7 +75,12 @@ function App() {
 esta varables que tengo metidas en el arreglo para hacer filtros*/
   }
   /*Aqui estamos llamando a nuestro custom Hook */
-  const [todos, saveTodos] = useLocalStorage("TODOS_V1",[]);
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error
+  } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
 
   const completedTodos = todos.filter((todo) => todo.completed == true).length;
@@ -91,11 +107,27 @@ esta varables que tengo metidas en el arreglo para hacer filtros*/
     //newTodos.splice()
     saveTodos(updated);
   };
+  /**Ejecuta el codigo justo despues de que react tiene todo
+   * listo para renderizar
+   */
+  console.log("Render (antes del use effect)");
+
+  /**Aqui lo que hace s ejecutarse cada que haya un cambio en lo que metimos
+   * en el arreglo, es decir qie cada que haya un cambio en el total de todos
+   * va a ejecutar ese useEffect
+   */
+  React.useEffect(() => {
+    console.log("use effect");
+  }, [totalTodos]);
+  console.log("Render (luego del use effect)");
+
   {
     /**Por division de responsabilidades se manda toda la interfaz a otra clase*/
   }
   return (
     <AppUI
+      loading={loading}
+      error={error}
       totalTodos={totalTodos}
       completedTodos={completedTodos}
       searchValue={searchValue}
