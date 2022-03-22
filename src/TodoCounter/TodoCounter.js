@@ -1,5 +1,5 @@
 import React from "react";
-import '../Styles/TodoCounterStyles.css';
+import './TodoCounterStyles.css';
 
 {/**La nomenclatura cambia no es como en css */}
 /*

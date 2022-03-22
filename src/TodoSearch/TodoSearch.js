@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/TodoSearch.css';
+import './TodoSearch.css';
 
 function TodoSearch({searchValue, setSearchValue}) {
     {/**Esto es como si fuera un observer mira constantemente

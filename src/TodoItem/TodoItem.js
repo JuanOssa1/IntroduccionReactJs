@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/TodoItem.css';
+import './TodoItem.css';
 {/**Aquin estoy recibiendo un ELEMENTO de la lista como tal
 no toda la lista, estoy obteniendo cada uno de los hijos de la lista
 por tanto aqui si puedo sacarle el texto y todo eso */}
