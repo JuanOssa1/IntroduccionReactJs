@@ -19,24 +19,46 @@ import { AppUI, AppUi } from "./AppUI";
  * es react.fragment que hace lo de un div pero sin afectar al css
  *
  */
+/*
 const defaultodos = [
   { text: "cortar cebolla", completed: false },
   { text: "tomar cebolla", completed: false },
   { text: "bailar cebolla", completed: false },
 ];
+*/
+
 
 function App() {
   {
     /**como react esta actualizando constamente pues puedo usar
 esta varables que tengo metidad en el arregloe para hacer filtros*/
   }
-  const [todos, setTodos] = React.useState(defaultodos);
+  const localStorageTodos = localStorage.getItem('TODOS_V1')
+  let parsedTodos;
+
+  if(!localStorageTodos){
+    localStorage.setItem('TODOS_V1',[JSON.stringify([])]);
+    parsedTodos = [];
+  } else {
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
+
+  const [todos, setTodos] = React.useState(parsedTodos);
   const [searchValue, setSearchValue] = React.useState("");
   const completedTodos = todos.filter((todo) => todo.completed == true).length;
   const totalTodos = todos.length;
   let filtered = todos.filter((todo) =>
     todo.text.includes(searchValue.toLowerCase())
   );
+  const saveTodos = (newTodos) =>{
+    {/*En set item TODOS_V1 es el nombre que nosotros
+  le definimos a ese local storage para luego llamarlo
+si lo ecesitamos* */}
+    const stringifiedTodos = JSON.stringify(newTodos);
+    localStorage.setItem('TODOS_V1',stringifiedTodos)
+    setTodos(newTodos);
+  };
 
   const completeTodo = (text) => {
     const todoIndex = todos.findIndex((todo) => todo.text === text);
@@ -45,7 +67,7 @@ esta varables que tengo metidad en el arregloe para hacer filtros*/
     }
     const newTodos = [...todos];
     newTodos[todoIndex].completed = true;
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
   const removeTodo = (text) => {
     const todoIndex = todos.findIndex((todo) => todo.text === text);
@@ -55,7 +77,7 @@ esta varables que tengo metidad en el arregloe para hacer filtros*/
     const newTodos = [...todos];
     let updated = newTodos.filter((newTodos) => !newTodos.text.includes(text));
     //newTodos.splice()
-    setTodos(updated);
+    saveTodos(updated);
   };
   {
     /**Por division de responsabilidades se manda toda la interfaz a otra clase*/

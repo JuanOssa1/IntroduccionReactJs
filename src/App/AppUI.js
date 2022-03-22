@@ -6,7 +6,6 @@ import { TodoItem } from "../TodoItem/TodoItem";
 import CreateTodoButtom from "../CreateTodoButtom/CreateTodoButtom";
 {/**deben ser los mismos nombre a los que uno iguala en app.js */}
 function AppUI({
-  
       totalTodos,
       completedTodos,
       searchValue,
