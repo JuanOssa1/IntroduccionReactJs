@@ -26,40 +26,52 @@ const defaultodos = [
   { text: "bailar cebolla", completed: false },
 ];
 */
+/**Haciendo nuestro propio react Hook */
+function useLocalStorage(itemName, initialValue) {
+  
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
 
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = initialValue;
+  } else {
+    parsedItem = JSON.parse(localStorageItem);
+  }
+
+  const [item, setItem] = React.useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    {
+      /*En set item itemName antes TODOS_V1 es el nombre que nosotros
+      le definimos a ese local storage para luego llamarlo
+      si lo ecesitamos* */
+    }
+    const stringifiedItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, stringifiedItem);
+    setItem(newItem);
+  };
+
+  return [
+    item,
+    saveItem,
+  ];
+}
 
 function App() {
   {
     /**como react esta actualizando constamente pues puedo usar
-esta varables que tengo metidad en el arregloe para hacer filtros*/
+esta varables que tengo metidas en el arreglo para hacer filtros*/
   }
-  const localStorageTodos = localStorage.getItem('TODOS_V1')
-  let parsedTodos;
-
-  if(!localStorageTodos){
-    localStorage.setItem('TODOS_V1',[JSON.stringify([])]);
-    parsedTodos = [];
-  } else {
-    parsedTodos = JSON.parse(localStorageTodos);
-  }
-
-
-  const [todos, setTodos] = React.useState(parsedTodos);
+  /*Aqui estamos llamando a nuestro custom Hook */
+  const [todos, saveTodos] = useLocalStorage("TODOS_V1",[]);
   const [searchValue, setSearchValue] = React.useState("");
+
   const completedTodos = todos.filter((todo) => todo.completed == true).length;
   const totalTodos = todos.length;
   let filtered = todos.filter((todo) =>
     todo.text.includes(searchValue.toLowerCase())
   );
-  const saveTodos = (newTodos) =>{
-    {/*En set item TODOS_V1 es el nombre que nosotros
-  le definimos a ese local storage para luego llamarlo
-si lo ecesitamos* */}
-    const stringifiedTodos = JSON.stringify(newTodos);
-    localStorage.setItem('TODOS_V1',stringifiedTodos)
-    setTodos(newTodos);
-  };
-
   const completeTodo = (text) => {
     const todoIndex = todos.findIndex((todo) => todo.text === text);
     {
@@ -89,8 +101,8 @@ si lo ecesitamos* */}
       searchValue={searchValue}
       setSearchValue={setSearchValue}
       filteredTodos={filtered}
-      completeTodo = {completeTodo}
-      removeTodo = {removeTodo}
+      completeTodo={completeTodo}
+      removeTodo={removeTodo}
     />
   );
 }
