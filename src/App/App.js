@@ -1,9 +1,5 @@
 import React from "react";
-import { TodoCounter } from "../TodoCounter/TodoCounter";
-import { TodoSearch } from "../TodoSearch/TodoSearch";
-import { TodoList } from "../TodoList/TodoList";
-import { TodoItem } from "../TodoItem/TodoItem";
-import CreateTodoButtom from "../CreateTodoButtom/CreateTodoButtom";
+import { AppUI, AppUi } from "./AppUI";
 //import './App.css';
 
 /**Un componente inicia con la letra mayuscula */
@@ -36,7 +32,7 @@ esta varables que tengo metidad en el arregloe para hacer filtros*/
   }
   const [todos, setTodos] = React.useState(defaultodos);
   const [searchValue, setSearchValue] = React.useState("");
-  const completedToDos = todos.filter((todo) => todo.completed == true).length;
+  const completedTodos = todos.filter((todo) => todo.completed == true).length;
   const totalTodos = todos.length;
   let filtered = todos.filter((todo) =>
     todo.text.includes(searchValue.toLowerCase())
@@ -61,26 +57,19 @@ esta varables que tengo metidad en el arregloe para hacer filtros*/
     //newTodos.splice()
     setTodos(updated);
   };
+  {
+    /**Por division de responsabilidades se manda toda la interfaz a otra clase*/
+  }
   return (
-    <React.Fragment>
-      <TodoCounter total={totalTodos} completed={completedToDos} />
-      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-      <TodoList>
-        {/**con key le encio el indentidicador unico de cada componente
-         * esto s para que lo use react no mas
-         */}
-        {filtered.map((todo) => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => removeTodo(todo.text)}
-          />
-        ))}
-      </TodoList>
-      <CreateTodoButtom />
-    </React.Fragment>
+    <AppUI
+      totalTodos={totalTodos}
+      completedTodos={completedTodos}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      filteredTodos={filtered}
+      completeTodo = {completeTodo}
+      removeTodo = {removeTodo}
+    />
   );
 }
 
