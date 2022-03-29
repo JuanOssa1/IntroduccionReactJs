@@ -14,7 +14,8 @@ function TodoProvider(props) {
     error,
   } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
-
+  const [openModal, setOpenModal] = React.useState(false);/**Por defecto el modal no esta abierto entonces se pone en falso
+  modal el de la clase modal la ventanita que tiene como otro fondo*/
   const completedTodos = todos.filter((todo) => todo.completed == true).length;
   const totalTodos = todos.length;
   let searchedTodos = [];
@@ -77,12 +78,14 @@ function TodoProvider(props) {
         searchedTodos,
         completeTodo,
         removeTodo,
+        openModal,
+        setOpenModal
       }}
     >
       {props.children}
     </TodoContext.Provider>
   );
 }
-<TodoContext.Consumer></TodoContext.Consumer>;
+
 
 export { TodoContext, TodoProvider };

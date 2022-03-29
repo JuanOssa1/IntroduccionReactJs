@@ -12,8 +12,7 @@ function AppUI() {
    * como value y despues hacer value.error y esas cosas pero
    * es mas facil de esta manera, mas intuitivo
    */
-  const { error, loading, searchedTodos, completeTodo, removeTodo } =
-    React.useContext(TodoContext);
+  const { error, loading, searchedTodos, completeTodo, removeTodo,openModal,setOpenModal} = React.useContext(TodoContext);
   return (
     <React.Fragment>
       <TodoCounter />
@@ -43,9 +42,12 @@ function AppUI() {
         ))}
       </TodoList>
       <Modal>
-        <h3>a</h3>
+        {/**El ? lo que hace e solo llamar la propiedad text
+         * cuando ya haya cargado el arreglo
+         */}
+        <p>{searchedTodos[0]?.text}</p>
       </Modal>
-      <CreateTodoButtom />
+      <CreateTodoButtom/>
     </React.Fragment>
   );
 }
