@@ -1,7 +1,9 @@
 import React from 'react';
+import { TodoContext } from '../TodoContext/TodoContext';
 import './TodoSearch.css';
 
-function TodoSearch({searchValue, setSearchValue}) {
+function TodoSearch() {
+  const {searchValue, setSearchValue} = React.useContext(TodoContext);
     {/**Esto es como si fuera un observer mira constantemente
 que es lo que ha cambiado y lo va actualizando retorna 
 un objeto y a ese ojet de las tantas propiedades que tiene

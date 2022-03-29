@@ -6,6 +6,7 @@ import './index.css';
 //import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
+  
   /**Asi escribiuremos el resto de los
    * componentes
    */
@@ -23,9 +24,12 @@ ReactDOM.render(
    * 
   */
     <App/>,
-
+    
     document.getElementById("root")
 );
+
+
+
 /*
 ReactDOM.render(
   /**Asi escribiuremos el resto de los

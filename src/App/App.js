@@ -26,11 +26,13 @@ const defaultodos = [
   { text: "tomar cebolla", completed: false },
   { text: "bailar cebolla", completed: false },
 ];
+localStorage.setItem('ejemplo',defaultodos)
 */
 /**Haciendo nuestro propio react Hook */
 
 
 function App() {
+  
     /**como react esta actualizando constamente pues puedo usar
 esta varables que tengo metidas en el arreglo para hacer filtros*/
 
