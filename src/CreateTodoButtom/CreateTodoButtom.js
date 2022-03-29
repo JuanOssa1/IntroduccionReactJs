@@ -2,13 +2,13 @@ import React from "react";
 import "./CreateTodoButton.css";
 
 function CreateTodoButton(props) {
-  const onclickButton = (msg) => {
-    alert(msg);
+  const onclickButton = () => {
+    props.setOpenModal(true);
   };
   return (
     <button
       className="CreateTodoButton"
-      onClick={() => onclickButton("Holaaaaa")}
+      onClick={onclickButton}
     >
       +
       {/**Todo lo que inicie en "on" son eventos que pueden suceder

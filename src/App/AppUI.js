@@ -41,13 +41,22 @@ function AppUI() {
           />
         ))}
       </TodoList>
-      <Modal>
-        {/**El ? lo que hace e solo llamar la propiedad text
-         * cuando ya haya cargado el arreglo
-         */}
-        <p>{searchedTodos[0]?.text}</p>
-      </Modal>
-      <CreateTodoButtom/>
+      {/**Aca lo que esta haciendo es preguntar
+       * si la propiedad open modal esta en true o false
+       * si esta en true hace lo que esta dentro del parentesis
+       */}
+      {openModal && (
+              <Modal>
+              {/**El ? lo que hace e solo llamar la propiedad text
+               * cuando ya haya cargado el arreglo
+               */}
+              <p>{searchedTodos[0]?.text}</p>
+            </Modal>
+      ) }
+
+      <CreateTodoButtom 
+        setOpenModal={setOpenModal}
+      />
     </React.Fragment>
   );
 }
