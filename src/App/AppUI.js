@@ -5,7 +5,8 @@ import { TodoSearch } from "../TodoSearch/TodoSearch";
 import { TodoList } from "../TodoList/TodoList";
 import { TodoItem } from "../TodoItem/TodoItem";
 import CreateTodoButtom from "../CreateTodoButtom/CreateTodoButtom";
-import { Modal } from "../Modal/index";
+import { Modal } from "../Modal/index"; /**Cuando el archivo que llamo es index podria dejarlo como ../Modal/ */
+import {TodoForm} from "../TodoForm/index"
   /**deben ser los mismos nombre a los que uno iguala en app.js */
 function AppUI() {
   /**Asi llamo todas las propiedades como tal podria guardar esto
@@ -49,8 +50,9 @@ function AppUI() {
               <Modal>
               {/**El ? lo que hace e solo llamar la propiedad text
                * cuando ya haya cargado el arreglo
+               * <p>{searchedTodos[0]?.text}</p>
                */}
-              <p>{searchedTodos[0]?.text}</p>
+              <TodoForm></TodoForm>
             </Modal>
       ) }
 
