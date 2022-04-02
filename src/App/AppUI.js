@@ -7,6 +7,10 @@ import { TodoItem } from "../TodoItem/TodoItem";
 import CreateTodoButtom from "../CreateTodoButtom/CreateTodoButtom";
 import { Modal } from "../Modal/index"; /**Cuando el archivo que llamo es index podria dejarlo como ../Modal/ */
 import {TodoForm} from "../TodoForm/index"
+import {EmptyTodos} from "../EmptyTodos/"
+import { TodosLoading } from "../TodosLoading/";
+import {TodosError} from "../TodosError/"
+
   /**deben ser los mismos nombre a los que uno iguala en app.js */
 function AppUI() {
   /**Asi llamo todas las propiedades como tal podria guardar esto
@@ -29,9 +33,9 @@ function AppUI() {
         {/**con key le envio el indentidicador unico de cada componente
          * esto s para que lo use react no mas
          */}
-        {error && <p>Desespérate, hubo un error...</p>}
-        {loading && <p>Estamos cargando, no desesperes...</p>}
-        {loading && !searchedTodos.length && <p>¡Crea tu primer TODO!</p>}
+        {error && <TodosError error={error}/>}
+        {loading && <TodosLoading/>}
+        {(!loading && !searchedTodos.length) && <EmptyTodos/>}
         {searchedTodos.map((todo) => (
           <TodoItem
             key={todo.text}
