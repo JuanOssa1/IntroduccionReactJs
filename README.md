@@ -3,7 +3,6 @@ Aqui podras observar la App que estuve desarrolando durante mi curso de Introduc
 
 https://juanossa1.github.io/IntroduccionReactJs/
 
-# ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Getting Started with Create React App
 
