@@ -1,5 +1,8 @@
 import React from "react";
 import "./TodoItem.css";
+import { IoIosCheckboxOutline } from "react-icons/io";
+import { IoIosClose } from "react-icons/io";  
+import {CheckBox} from "../Components/code/icons"
 {
   /**Aquin estoy recibiendo un ELEMENTO de la lista como tal
 no toda la lista, estoy obteniendo cada uno de los hijos de la lista
@@ -20,14 +23,14 @@ function TodoItem(props) {
         className={`Icon Icon-check ${props.completed && "Icon-check--active"}`}
         onClick={props.onComplete}
       >
-        √
+        <IoIosCheckboxOutline/>
       </span>
 
       <p className={`TodoItem-p ${props.completed && "TodoItem-p--complete"}`}>
         {props.text}
       </p>
       <span className="Icon Icon-delete" onClick={props.onDelete}>
-        X
+        <IoIosClose/>
       </span>
     </li>
   );
