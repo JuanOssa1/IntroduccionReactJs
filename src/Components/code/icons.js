@@ -1,9 +1,9 @@
 import React from "react";
 import '../css/icons.css'
-import {ReactComponent as check} from "../images/check.svg"
+import {ReactComponent as Check} from "../images/check.svg"
 
 const iconTypes = {
-    "check": (<check className="check-svg"></check>)
+    "check": (<Check className="check-svg"></Check>)
 };
 
 
